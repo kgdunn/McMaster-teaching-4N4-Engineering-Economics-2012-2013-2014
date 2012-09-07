@@ -16,7 +16,7 @@
 \providetoggle{instructor}
 %\providetoggle{student}
 \providetoggle{unixmac}
-\settoggle{instructor}{false}    %\iftoggle{instructor}{}{}
+\settoggle{instructor}{true}    %\iftoggle{instructor}{}{}
 %\settoggle{student}{false}      %\iftoggle{student}{}{}
 \settoggle{unixmac}{true}
 \iftoggle{unixmac}
@@ -43,7 +43,7 @@
 % Show page numbers and dates on slides
 \setbeamertemplate{footline}{\begin{beamercolorbox}[right]{section in head/foot}{\color{myLightGrey}{\tiny \copyright Kevin Dunn, \today}} ~~~ \vskip5pt \end{beamercolorbox}}
 
-\setbeamercovered{transparent} 
+\setbeamercovered{transparent=4} 
 
 \hypersetup{colorlinks        = true,    
  			linkcolor         = blue,    
