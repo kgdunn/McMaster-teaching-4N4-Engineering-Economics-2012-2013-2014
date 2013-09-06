@@ -28,6 +28,8 @@
 	\newcommand{\imagedir}{C:/Figures}
 }
 
+
+
 \usetheme{default} 
 \setbeamertemplate{navigation symbols}{}          % suppress all navigation symbols
 \setbeamertemplate{blocks}[rounded][shadow=true]  % use rounded blocks (boxes), with shadows
@@ -41,26 +43,27 @@
 \definecolor{Brown}{cmyk}{0,0.81,1,0.60}
 \definecolor{OliveGreen}{cmyk}{0.64,0,0.95,0.40}
 \definecolor{CadetBlue}{cmyk}{0.62,0.57,0.23,0}
+\definecolor{purple}{rgb}{0.70,0.22,0.92}
+
 
 % Show page numbers and dates on slides
-\setbeamertemplate{footline}{\begin{beamercolorbox}[right]{section in head/foot}{\color{myLightGrey}{}} ~~~ \vskip5pt \end{beamercolorbox}}
+\setbeamertemplate{footline}{\begin{beamercolorbox}[right]{section in head/foot}{\color{black}{\tiny \insertframenumber}} ~~~ \vskip5pt \end{beamercolorbox}}
 
-\setbeamercovered{transparent=4} 
+\setbeamercovered{transparent=1} 
 
 \hypersetup{colorlinks        = true,    
  			linkcolor         = blue,    
-}
 % 			linkbordercolor   = {1 0 0},    
 % 			urlcolor          = cyan,    
 % 			bookmarks         = {true,},    
 % 			bookmarksopen     = {true,},    
 % 			bookmarksnumbered = {false,},    
-% 			pdftitle          = {Kevin Dunn},
-% 			pdfsubject        = {Kevin Dunn},
-% 			pdfauthor         = {Kevin Dunn},
-% 			pdfproducer       = {LaTeX, wiki2beamer, beamer, BeamerPDF},    
-% 			pdfkeywords       = http://learnche.mcmaster.ca/,
-% 		}
+ 			pdftitle          = {Kevin Dunn},
+ 			pdfsubject        = {Kevin Dunn},
+ 			pdfauthor         = {Kevin Dunn},
+ 			pdfproducer       = {LaTeX, wiki2beamer, beamer, BeamerPDF},    
+ 			pdfkeywords       = http://learnche.mcmaster.ca/,
+ 		}
 \usepackage{pgfpages}
 
 \makeatletter
@@ -80,3 +83,4 @@
 \newcommand{\micron}{$\mu $m}
 \newcommand{\see}[1]{{\tiny [{\color{myBlue}{#1}}]}}
 \newcommand{\seefull}[1]{{\color{myBlue}{#1}}}
+\newcommand{\degC}{$^\circ\text{C}$}
