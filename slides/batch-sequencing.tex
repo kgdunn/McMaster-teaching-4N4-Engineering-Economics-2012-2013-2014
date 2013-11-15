@@ -1,0 +1,502 @@
+% Compile once, then ``bibtex 2013-4N4-class-12``, then compile twice more
+\begin{frame}\frametitle{Credit} These slides are all the work of Chris Ewaschuk
+	
+	\vspace{12pt} TA for the 4N04 course in 2013. 
+\end{frame}
+
+\begin{frame}\frametitle{Practice Example}
+	Consider the simplified Kondili Process and create a feasible production schedule for a 4 hour time horizon. A complete production sequence requires the following steps: 
+	\begin{enumerate}
+		\item	Heat A (1hr), 
+		\item	React A, B and C (2hr), 
+		\item	Product separation (1h) 
+	\end{enumerate}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.75
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/SKPFD.png}
+			
+			\label{fig:SKPFD} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Practice Example II}
+	Considerations: 
+	\begin{itemize}
+		\item	Do you have a feasible production schedule? 
+		\item	What happens if one of the units breaks down or requires maintenance? 
+		\item	Have you considered unit capacities? Storage policies? 
+		\item	is your schedule ``good''? {\scriptsize \emph{We will define good later. }}
+		\item	How far to the limit can we push the schedule? 
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.65\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/SKPFD.png}
+			\label{fig:SKPFD2} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{What is Batch Scheduling?}
+	\begin{itemize}
+		\item	batch scheduling can be considered the sequencing and timing of process unit utilization in order to achieve a feasible production schedule		
+		\item	{\color{purple}{\textbf{scheduling}}} - timing of events 
+		\item	{\color{purple}{\textbf{sequencing}}} - the order events are placed in (based on precedence relationships)		
+		\item	answers the questions of when and how a unit operation will be used in order to fulfill a company's needs
+		\item	operational plant hierarchy:
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.6\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/PlantHierarchy.png} \label{fig:PH} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{What is Batch Scheduling? II}
+	\begin{itemize}
+		\item	It is a critical issue in process operations 
+		\item	Short-term scheduling in batch processes involves:
+		\begin{itemize}
+			\item	allocation decisions 
+			\item	limited resources 
+			\item	a given time horizon 
+			\item	manufacturing products through the use of a batch recipe \cite{MendyNco06} 
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Problem Classification - Objectives}
+	
+	Various objectives / metrics exist:
+	\begin{itemize}
+		
+		\item	Maximize Profit		
+		\item	Minimize Cost		
+		\item	Minimize {\color{purple}Makespan} - given a fixed demand, minimize total required production time 
+		\newline
+		
+		\item	Maximize Throughput - given a fixed time horizon, produce as much as possible 
+		\newline
+		
+		\item	{\color{purple}Tardiness} - absolute value of the difference between completion time and due date 
+		\newline
+		
+		\item	{\color{purple}Lateness} - difference between completion time and due date
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Why is this a relevant problem to Chemical Engineers?}
+	\begin{itemize}
+		
+		\item	A typical medium scale integrated chemical site produce revenues worth \$ 5 to 10 million per day \cite{ShobW} 
+		\item	Exxon Chemicals reduced annual operating costs by 2 \% and operating inventory by 20 \% \cite{ShobW} 
+		\item	DuPont reduced working capital in inventory from \$ 160m to 95m \cite{ShobW} 
+		\item	Scheduling is being used more and more commonly as a competitive advantage to cut costs. The increasingly relevant question is: ``{\color{myOrange}\emph{How can I out-schedule my competitors}}''?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Why is this a relevant problem to Chemical Engineers? II}
+	Certain processes are still operated batch-wise for several reasons i.e.:
+	\begin{itemize}
+		\item	retrofitting existing batch tech or commissioning new continuous processes can have a very high capital cost			
+		\item	industries that are highly regulated (Pharma) may not be able to currently transition from batch to continuous due to governmental (FDA) restrictions - currently a growing topic in ChE research			
+		\item	quality control issues - if one batch is ruined or sub-standard you may be able to prevent a fault from affecting other batches (avoid spoilage)			
+		\item	your product yields sufficiently high profit margins with batch tech that converting to continuous is not necessarily desirable			
+		\item	batch processes can be more flexible than continuous i.e. batch can allow for multiple process configurations whereas continuous might not
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Methods - Heuristical}
+	\begin{itemize}
+		\item	Many companies may perform process scheduling using simply a program like Excel, experience, and intuition much like you might have in the previous example		
+		\item	Let's look at some other methods		
+		\item	Heuristic methods take advantage of empirical solution methods \cite{MendyNco06}
+	\end{itemize}
+	\begin{itemize}
+		\item	{\color{purple}{\textbf{cycle time}}} is the average time to produce a batch 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Example I}
+	
+	Non-overlapping schedules \; Backward Overlapping Schedule
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.45
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/non-overlapping-sequence}
+			
+			%\caption{Optimal Schedule}
+			
+			\includegraphics[width=0.45
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/backward-shift-to-get-overlap}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg1} 
+		\end{center}
+	\end{figure}
+	
+	Overlapping schedules
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.75
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/limiting-case-for-overlap}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg2} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Example II}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/example-3-5-table}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg3} 
+		\end{center}
+	\end{figure}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/flowshop-plant-for-ABC}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg3pfd} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Example A}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/example-3-5-A-only}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg4} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Example B}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/example-3-5-B-only}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg5} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Example C}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/example-3-5-C-only}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg5} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Example A,B,C}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/example-3-5-A-B-C}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:Eg5} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Problem classification: Plant type}
+	
+	{\color{purple}Flowshop}
+	\begin{itemize}
+		\item	all products use same equipment or same sequence 
+		\item	i.e. the steps to make biscuits or cake include (mix, bake, cool, icing) 
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/flowshop-plant-for-ABC}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:flow} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Problem classification: Plant type}
+	
+	{\color{purple}Jobshop}
+	\begin{itemize}
+		\item	products use either different equipment or sequence\\
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/two-examples-of-jobshop-plants}
+			
+			%\caption{Optimal Schedule}
+			\label{fig:job} 
+		\end{center}
+	\end{figure}
+	
+	\cite{turton}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling methods: Optimization related}
+	
+	Constraint Programming 
+	\begin{itemize}
+		\item	was originally developed to solve feasibility problems 
+		\item	has been extended to solve optimization problems 
+		\item	contains continuous, integer, and boolean variables 
+		\item	variables can be indexed by other variables \cite{MendyNco06} 
+	\end{itemize}
+	
+	Metaheuristics
+	\begin{itemize}
+		\item	local search algorithms such as Simulated Annealing, Genetic Algorithms, Tabu Search \cite{MendyNco06} 
+		\item	can obtain good quality solutions within reasonable time 
+		\item	do not guarantee optimality 
+		\item	give no measure of the optimality gap 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Methods - Optimization Based} Use an optimization framework i.e. the following Mixed Integer Linear Program (MILP)
+	\begin{equation*}
+		\begin{aligned}
+			& \underset{X,Y}{\text{minimize}} & & C_{1}^{T}X + C_{2}^{T}Y \\
+			& \text{subject to} & & A^{T}X + B^{T}Y \leq D\\
+			& Y \; = \; Integer 
+		\end{aligned}
+	\end{equation*}
+	\begin{itemize}
+		\item	can be solved to global optimality 
+		\item	give a measure of optimality gap 
+		\item	can be very computationally expensive to solve 
+		\item	modelling can be very complicated 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Methods - Optimally Generated Schedules}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/OG1} \label{fig:Og1} 
+		\end{center}
+	\end{figure}
+	\begin{center}
+		\begin{tabular}
+			{ c |c|c| c } \hline Binary Variables & 78 & Continuous Variables & 167\\
+			\hline Constraints & 247 & Nodes & 0\\
+			\hline MIP Simplex Iterations & 81 & CPU seconds & 0.031\\
+			\hline 
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Methods - Optimally Generated Schedules II}
+	
+	The optimizations presented here are quite ``small'' problems and solve very fast\\
+	
+	\cite{FnL04} cite some models with thousands of binaries, continuous variables, and constraints which can take between 20 minutes up to 3 hours!
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/OG2}  \label{fig:Og2} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Methods - Optimally Generated Schedules III}
+	
+	\cite{ierpfa} \nocite{ierpfb}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.99
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/OG3} \label{fig:Og3} 
+		\end{center}
+	\end{figure}
+	\begin{center}
+		\begin{tabular}
+			{ c |c|c| c } \hline Binary Variables & 60 & Continuous Variables & 192\\
+			\hline Constraints & 346 & Nodes & 0\\
+			\hline MIP Simplex Iterations & 137 & CPU seconds & 0.187\\
+			\hline 
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Scheduling Software}
+	\begin{itemize}
+		\item	in terms of optimization based scheduling CPLEX (ILOG), XPRESS (Dash Optimization, 2003), and Gurobi are available which use LP-based branch and bound algorithm combined with cutting plane techniques in combination with GAMS, AMPL, AIMMS (ChE 4G03) 
+		\item	Aspen Plant Scheduler where the solution is integrated with the Aspen Available-to-Promise/Capable-to-Promise solution, 
+		\item	OSS scheduler from Process Systems Enterprise Ltd. determines optimal production based on STN as a basis 
+		\item	VirtECS Schedule from Advanced Process Combinatorics devises an optimized schedule satisfying constraints and includes an Interactive Scheduling Tool 
+		\item	SAP Advanced Planner and Optimizer SAP uses mySAP (SAP APO), which supports real-time and network optimization 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Semi Exhaustive List of Batch Scheduling Applications - Research Collaborations with Carnegie Mellon}
+	\begin{itemize}
+		\item	Batch Scheduling with Electric Power Constraints (ABB) 
+		\item	Multiperiod Scheduling of Polypropylene Production (Braskem) 
+		\item	Simultaneous Scheduling and Dynamic Optimization of Batch Processes (Dow) 
+		\item	Global Optimization of Bilinear GDP Models (ExxonMobil) 
+		\item	Multistage Stochastic Programming for Design and Planning of Oil and Gasfields (ExxonMobil) 
+		\item	Planning and Scheduling for Glass Production (PPG) 
+		\item	Capacity Planning of Power Intensive Networks with Changing Electricity Prices (Praxair) 
+		\item	Scheduling of Crude Oil Operations (Total) 
+		\item	Scheduling of Fast Moving Consumer Goods (Unilever) 
+	\end{itemize}
+	\cite{Gman-adv} 
+\end{frame}
+
+\begin{frame}\frametitle{Semi Exhaustive List of Batch Scheduling Applications - II Industry Breakdown}
+	
+	Petroleum 
+	\begin{itemize}
+		\item	BP, Braskem, Ecopetrol, ExxonMobil, NOVA Chemicals, Total 
+	\end{itemize}
+	
+	Vendors/ Consulting 
+	\begin{itemize}
+		\item	ABB, Honeywell 
+	\end{itemize}
+	
+	Polymer/ Chemicals Manufacturing 
+	\begin{itemize}
+		\item	DOW, DuPont, Braskem 
+	\end{itemize}
+	
+	Air Separation 
+	\begin{itemize}
+		\item	Praxair, Air Liquide 
+	\end{itemize}
+	
+	Consumer Goods 
+	\begin{itemize}
+		\item	Unilever 
+	\end{itemize}
+	
+	Glass Manufacturing 
+	\begin{itemize}
+		\item	PPG 
+	\end{itemize}
+	
+	and more! 
+\end{frame}
+
+\begin{frame}\frametitle{Short History Lesson}
+	\begin{itemize}
+		\item	scheduling was a problem originally considered and studied by Operations Research and Management Science (Fields of Business - Logistics) 
+		\item	Gantt Chart invented by Henry Gantt in (Organizing for Work, 1910) 
+		\item	Gantt chart is a bar plot illustrating the start and finish of a project schedule 
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.9
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/Gchart}
+			
+			%\caption{Gantt Chart}
+			\label{fig:Gchart} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Short History Lesson II}
+	
+	A project management technique referred to as the Critical Path Method (CPM) that uses the Project Evaluation and Review Technique (PERT) from 1950's
+	\begin{itemize}
+		\item	maps out the activities required to complete a project 
+		\item	includes the time it will take to complete activities and activity interdependence 
+		\item	circles (nodes) represent an activity requiring completion, arcs represent dependencies 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}\frametitle{Short History Lesson III}
+	\begin{itemize}
+		\item	the critical path (shortest path that completes all activities) is the longest path through the schematic (minimax problem) 
+		\item	below is the activity on node (AON) configuration, activity on arc is an alternative (AOA) 
+		\item	a PERT chart:
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.9
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/PERT} \label{fig:PERT} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Short History Lesson IV}
+	\begin{itemize}
+		\item	scheduling was an increasingly relevant industrial problem and was adopted by industrial and chemical engineers 
+		\item	one of the first academic papers in Chemical Engineering was by \cite{kondili} and \cite{shah} who developed the concept of the State Task Network (STN) 
+		\item	the STN is a systematic method by which Chemical Engineers can model a chemical process in an optimization framework (This is and was a SIGNIFICANT contribution!) 
+	\end{itemize}
+	\begin{center}
+		ChE vs. OR terminology
+		\begin{tabular}
+			{ l | c | r } \hline & ChE & OR \\
+			\hline i & tasks & jobs \\
+			j & units & machines \\
+			n & time intervals / event points & time intervals \\
+			\hline 
+		\end{tabular}
+	\end{center}
+\end{frame}
+
+\begin{frame}\frametitle{Short History Lesson V}
+	\begin{itemize}
+		\item	state nodes represent feeds, intermediate and final products (circles) 
+		\item	task nodes, represent processing operations which transform material from one or more input states to one or more output states (rectangles) 
+	\end{itemize}
+	\begin{figure}
+		[!htb] 
+		\begin{center}
+			\includegraphics[width=0.9
+			\textwidth]{\imagedir/econ-prob-solve/batch-sequencing/STN} \label{fig:STN} 
+		\end{center}
+	\end{figure}
+\end{frame}
+
+\begin{frame}\frametitle{Short History Lesson VI}
+	\begin{itemize}
+		\item	\cite{EWO} describes Enterprise-wide optimization an area that lies at the interface of chemical engineering (process systems engineering)and operations research 
+		\item	involves optimizing the operations manufacturing (batch or continuous) and distribution 
+		\item	predicts major involvement of chemical engineers to develop novel novel computational models and algorithms to solve real world problems \cite{EWO} 
+	\end{itemize}
+\end{frame}
+
+{\bf References}
+\bibliography{summary} 
+\bibliographystyle{apalnew} 
