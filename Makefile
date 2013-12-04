@@ -15,9 +15,9 @@ else
 endif
 
 default:
-	pdflatex --shell-escape --jobname=$(SUBDIR)2013-4N4-class-01 $(MAIN).tex;
+	pdflatex --shell-escape --jobname=$(SUBDIR)2013-4N4-class-14 $(MAIN).tex;
 
-	open $(SUBDIR)2013-4N4-class-01.pdf
+	open $(SUBDIR)2013-4N4-class-14.pdf
 
 all: clean
 	$(foreach FILE, $(CLASSES), $(MAKE) $(FILE);)
