@@ -14,10 +14,12 @@ else
 	SUBDIR = classes/
 endif
 
-default:
-	pdflatex --shell-escape --jobname=$(SUBDIR)2013-4N4-class-14 $(MAIN).tex;
+.DEFAULT_GOAL := 01
 
-	open $(SUBDIR)2013-4N4-class-14.pdf
+default:
+	pdflatex --shell-escape --jobname=$(SUBDIR)2014-4N4-class-$* $(MAIN).tex;
+
+	open $(SUBDIR)2014-4N4-class-$*.pdf
 
 all: clean
 	$(foreach FILE, $(CLASSES), $(MAKE) $(FILE);)
